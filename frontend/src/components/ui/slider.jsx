@@ -1,21 +1,54 @@
-import * as React from "react"
-import * as SliderPrimitive from "@radix-ui/react-slider"
+import React from "react"
 
-import { cn } from "@/lib/utils"
+const Slider = React.forwardRef(({ 
+  className = '', 
+  value = [0],
+  onValueChange,
+  max = 100,
+  min = 0,
+  step = 1,
+  disabled = false,
+  ...props 
+}, ref) => {
+  const handleChange = (e) => {
+    const newValue = [parseInt(e.target.value)]
+    onValueChange?.(newValue)
+  }
 
-const Slider = React.forwardRef(({ className, ...props }, ref) => (
-  <SliderPrimitive.Root
-    ref={ref}
-    className={cn("relative flex w-full touch-none select-none items-center", className)}
-    {...props}>
-    <SliderPrimitive.Track
-      className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20">
-      <SliderPrimitive.Range className="absolute h-full bg-primary" />
-    </SliderPrimitive.Track>
-    <SliderPrimitive.Thumb
-      className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
-  </SliderPrimitive.Root>
-))
-Slider.displayName = SliderPrimitive.Root.displayName
+  return (
+    <div className={`relative flex w-full touch-none select-none items-center ${className}`} {...props}>
+      <input
+        ref={ref}
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value[0]}
+        onChange={handleChange}
+        disabled={disabled}
+        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+      />
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #1f2937;
+          cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #1f2937;
+          cursor: pointer;
+          border: none;
+        }
+      `}</style>
+    </div>
+  )
+})
+Slider.displayName = "Slider"
 
 export { Slider }

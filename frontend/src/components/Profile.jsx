@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { Badge } from '../components/ui/badge';
-import { Progress } from '../components/ui/progress';
-import { Separator } from '../components/ui/separator';
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
+import { Button } from './ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
 import { toast } from 'sonner';
 import XPChart from './charts/XPChart';
 import AuditChart from './charts/AuditChart';
