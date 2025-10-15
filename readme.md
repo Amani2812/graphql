@@ -1,4 +1,10 @@
-Objectives
+## # GraphQL Profile Project
+# Deployment
+netlify:
+https://amanisgraphql.netlify.app/login
+
+## Objectives
+
 The objective of this project is to learn the query language graphQL by creating your own profile page. It will be provided,
 by the platform, a graphQL endpoint that is connected to the database. So you can query this endpoint to obtain the information you desire.
 Note that for security reasons some tables are private and some are public, you will only be provided with certain content.
