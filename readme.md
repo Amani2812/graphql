@@ -1,151 +1,176 @@
-## # GraphQL Profile Project
-# Deployment
-netlify:
-https://amanisgraphql.netlify.app/login
+ # Complete Guide: How to Run and View Your GraphQL Profile App
 
-## Objectives
+## 🌐 OPTION 1: View on Netlify (Already Deployed - Easiest!)
 
-The objective of this project is to learn the query language graphQL by creating your own profile page. It will be provided,
-by the platform, a graphQL endpoint that is connected to the database. So you can query this endpoint to obtain the information you desire.
-Note that for security reasons some tables are private and some are public, you will only be provided with certain content.
+Your app is already live and deployed on Netlify. Simply open this link in Google Chrome or any browser:
 
-Your profile must have at least 3 sections of content at your choice, for example:
+**🔗 https://amanisgraphql.netlify.app/login**
 
-Basic user identification
-XP amount
-level
-grades
-audits
-skills
-Beside those sections it will have a mandatory section for the generation of statistic graphs.
+No terminal commands needed - just click the link!
 
-Instructions
-You will have to create a profile UI where you can see your own school information. This information/data is present on the graphQL endpoint, where you will have to query it.
+---
 
-The UI design is up to you. However, have in mind the principles of a good UI.
-The UI will have a statistic section where you can generate graphs to see more about your journey and achievements on the school. This graphs must be done using SVG. You will have to do at least two different statistic graphs for the data given.
+## 💻 OPTION 2: Run Locally on Your Computer
 
-Using SVG you can create several types of graphs including interactive graphs and animated graph. It will be up to you to decide what type of graphs you are going to do.
+### Step-by-Step Terminal Commands:
 
-Here are some possible combinations for the creation of the graphs:
+#### **First Time Setup (Only needed once):**
 
-XP earned in a time period (progress over time)
-Levels over time
-XP earned by project
-Audit ratio
-Projects PASS and FAIL ratio
-Piscine (JS/Go) stats
-PASS and FAIL ratio
-Attempts for each exercise
-Any other information you desire to display is welcome and will be noted.
+1. Open your terminal (PowerShell/Command Prompt)
 
-Hosting
-Besides the creation of your own profile you will have to host it! There are several places where you can host your profile,
-for example: github-pages, netlify and so on. You are free to choose the hosting place.
+2. Navigate to the frontend folder:
+   ```
+   cd c:/Users/amani/graphql/frontend
+   ```
 
-Usage
-To test your queries you can access the GraphQL IDE on https://((DOMAIN))/graphiql/ or create your own GraphiQL Docs. This will give you a bigger picture of the tables, attributes and all the types of queries that you can do.
+3. Install dependencies (only needed once):
+   ```
+   yarn install
+   ```
 
-Here are the list of tables that you are allowed to query (it will be only provided the columns present on the tables):
+#### **Every Time You Want to Run the App:**
 
-User table:
+1. Open your terminal
 
-This table will have information about the user
+2. Navigate to the frontend folder:
+   ```
+   cd c:/Users/amani/graphql/frontend
+   ```
 
-id	login
-1	person1
-2	person2
-3	person3
-Transactions table:
+3. Start the development server:
+   ```
+   yarn start
+   ```
 
-This table will give you access to XP and audits ratio
+4. Wait for the message: "Compiled successfully!"
 
-id	type	amount	objectId	userId	createdAt	path
-1	xp	234	42	1	2021-07-26T13:04:02.301092+00:00	/madere/div-01/graphql
-2	xp	1700	2	2	2021-07-26T13:04:02.301092+00:00	/madere/div-01/graphql
-3	xp	175	64	3	2021-07-26T13:04:02.301092+00:00	/madere/div-01/graphql
-Progress table:
+5. The app will automatically open in your browser at:
+   **http://localhost:3000**
 
-id	userId	objectId	grade	createdAt	updatedAt	path
-1	1	3001	1	2021-07-26T13:04:02.301092+00:00	2021-07-26T13:04:02.301092+00:00	/madere/piscine-go/quest-01
-2	2	198	0	2021-07-26T13:04:02.301092+00:00	2021-07-26T13:04:02.301092+00:00	/madere/piscine-go/quest-01
-3	3	177	1	2021-07-26T13:04:02.301092+00:00	2021-07-26T13:04:02.301092+00:00	/madere/piscine-go/quest-01
-Results table:
+6. If it doesn't open automatically, manually open Google Chrome and go to:
+   **http://localhost:3000**
 
-Both progress and result table will give you the student progression
+#### **To Stop the Server:**
+- Press `Ctrl + C` in the terminal
 
-id	objectId	userId	grade	progressId	type	createdAt	updatedAt	path
-1	3	1	0	58		2021-07-26T13:04:02.301092+00:00	2021-07-26T13:04:02.301092+00:00	/madere/div-01/graphql
-2	23	1	0	58		2021-07-26T13:04:02.301092+00:00	2021-07-26T13:04:02.301092+00:00	/madere/div-01/graphql
-3	41	6	1	58		2021-07-26T13:04:02.301092+00:00	2021-07-26T13:04:02.301092+00:00	/madere/div-01/graphql
-Object table:
+---
 
-This table will give you information about all objects (exercises/projects)
+## 📝 Quick Reference Commands
 
-id	name	type	attrs	childrenAttrs
-1	0	exercise	{"language": "dom", ...	{}
-2	0	project	{"language": "go", ...	{}
-3	1	exercise	{"language": "js", ...	{}
-Examples:
+**Start the app:**
+```powershell
+cd c:/Users/amani/graphql/frontend
+yarn start
+```
 
-Lets take for instance the table user and try to query it:
+**Stop the app:**
+```
+Ctrl + C
+```
 
-{
-  query {
-      user {
-          id
-      }
-  }
-}
-This simple query will return an array with the ids of the users. Imagine if you wanted the login, you could just add this attribute to the query like so:
+**Build for production:**
+```powershell
+cd c:/Users/amani/graphql/frontend
+yarn build
+```
 
-{
-  query {
-      user {
-          id
-          login
-      }
-  }
-}
-You can try to curl the API endpoint to see the result given by the server:
+---
 
-curl "https://((DOMAIN))/api/graphql-engine/v1/graphql" --data '{"query":"{user{id login}}"}'
-Here is another example of a query using the table user:
+## 🔗 Your App URLs
 
-{
-  query {
-    user(where: { id: { _eq: 6 }}) {
-      id
-      login
-    }
-  }
-}
-Note that for this query the introduction of variables (arguments) is required, so it will return just one user, the user that has the id equal to 6.
+- **Netlify (Live):** https://amanisgraphql.netlify.app/login
+- **Local Development:** http://localhost:3000
+- **Local Network:** http://172.20.224.1:3000
 
-You can see the result using curl:
+---
 
-curl "https://((DOMAIN))/api/graphql-engine/v1/graphql" --data '{"query":"{user(where:{id:{_eq:6}}){id login}}"}'
-In graphQL the usage of arguments can be specified in the schema of the API. Like said above you can visit the docs for the graphQL endpoint, https://((DOMAIN))/graphiql
+## ✅ What's Working Now
 
-Example of nesting, using the result and user table :
+✓ Token validation on startup
+✓ Automatic logout for expired/invalid sessions
+✓ Proper error messages
+✓ Login page accessible
+✓ Profile page with GraphQL data
+✓ Interactive SVG charts
+✓ Responsive design
 
-{
-  result {
-    id
-    user {
-      id
-      login
-    }
-  }
-}
-For this example we ask for the results id and users that are associated to the result, requesting the users logins and ids.
+---
 
-You must use all the types of querying present above (normal, nested and using arguments), do not forget that you can use the types together or separately.
+## 🎯 How to Use
 
-This project will help you learn about:
+1. **Open the app** (Netlify link or localhost:3000)
+2. **Login** with your school credentials (username/email and password)
+3. **View your profile** with XP, projects, and statistics
+4. **Explore the charts** in different tabs
+5. **Logout** when done using the logout button
 
-GraphQL
-GraphiQL
-Hosting
-Basics of human-computer interface
-UI/UX
+---
+
+## 🐛 Troubleshooting
+
+### Issue: "Failed to load profile data"
+**Solution:** This happens if you have an old/invalid token. The app now automatically clears invalid tokens and redirects you to login.
+
+### Issue: App doesn't open automatically
+**Solution:** Manually open your browser and go to http://localhost:3000
+
+### Issue: Port 3000 already in use
+**Solution:** 
+1. Stop any other apps running on port 3000
+2. Or change the port by setting: `PORT=3001 yarn start`
+
+### Issue: "yarn: command not found"
+**Solution:** Install Yarn first:
+```
+npm install -g yarn
+```
+
+---
+
+## 📦 Project Structure
+
+```
+graphql/
+├── frontend/           # React application
+│   ├── src/
+│   │   ├── App.js     # Main app with routing & token validation
+│   │   ├── components/
+│   │   │   ├── Login.jsx      # Login page
+│   │   │   ├── Profile.jsx    # Profile dashboard
+│   │   │   └── charts/        # SVG charts
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+├── backend/           # FastAPI server (optional)
+└── readme.md
+```
+
+---
+
+## 🚀 Deployment
+
+Your app is already deployed on Netlify. To update the deployment:
+
+1. Make your changes locally
+2. Commit and push to your Git repository
+3. Netlify will automatically rebuild and deploy
+
+Or manually deploy:
+```powershell
+cd c:/Users/amani/graphql/frontend
+yarn build
+# Then upload the 'build' folder to Netlify
+```
+
+---
+
+## 📞 Need Help?
+
+- Check the browser console (F12) for error messages
+- Verify your school credentials are correct
+- Ensure you have internet connection (app needs to connect to learn.01founders.co)
+- Make sure Node.js and Yarn are installed
+
+---
+
+**That's it! Your app is ready to use both locally and on Netlify. Enjoy exploring your GraphQL profile! 🎉**
