@@ -1,3 +1,5 @@
+// Profile.jsx - Profile dashboard with GraphQL data and SVG charts
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Button } from './ui/button';
@@ -20,6 +22,7 @@ const Profile = ({ user, onLogout }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Execute GraphQL query
   const executeGraphQLQuery = async (query, variables = {}) => {
     const token = localStorage.getItem('jwt_token');
     
@@ -30,10 +33,7 @@ const Profile = ({ user, onLogout }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-          query,
-          variables
-        })
+        body: JSON.stringify({ query, variables })
       });
 
       const result = await response.json();
@@ -50,6 +50,7 @@ const Profile = ({ user, onLogout }) => {
     }
   };
 
+  // Fetch all profile data
   const fetchProfileData = async () => {
     setLoading(true);
     try {

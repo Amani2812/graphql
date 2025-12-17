@@ -1,3 +1,5 @@
+// Login.jsx - Login page with Basic Authentication
+
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Button } from './ui/button';
@@ -33,7 +35,6 @@ const Login = ({ onLogin }) => {
         toast.success('Login successful!');
         onLogin(data.token || data);
       } else {
-        const errorText = await response.text();
         setError('Invalid credentials. Please check your username/email and password.');
         toast.error('Login failed');
       }
